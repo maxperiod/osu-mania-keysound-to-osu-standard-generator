@@ -32,7 +32,7 @@ public class Note {
 		
 		String[] keysoundComponents = components[5].split(":");
 		
-		if (noteType == 1){
+		if (noteType == 1 || noteType == 5){
 			if (keysoundComponents.length == 5) 
 				keysound = keysounds.indexOf(keysoundComponents[4]);
 		}

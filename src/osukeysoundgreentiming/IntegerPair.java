@@ -50,7 +50,7 @@ public class IntegerPair implements Comparable<IntegerPair>{
 
 	public void rearrangeValuesSmallerFirst() {
 		
-		if (second != -1){
+		if (second != -1 && second != -2){
 			
 			if (second < first){
 				int temp = first;
