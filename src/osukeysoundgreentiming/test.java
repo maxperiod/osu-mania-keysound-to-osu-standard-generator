@@ -15,10 +15,10 @@ import java.util.TreeSet;
 
 public class test {
 	
-	private static String inputKeysoundOsuFile = "E:\\osu!\\Songs\\zl o2jam\\Dr.Flowershirts - zl (Max Period) [keysound].osu"; 
+	private static String inputKeysoundOsuFile = "E:\\osu!\\Songs\\zl o2jam\\Dr.Flowershirts - zl (Max Period) [keysound sliders].osu"; 
 	private static String outputFolderPath = "E:\\osu!\\Songs\\zl o2jam - Copy";
 
-	private static boolean COPY_KEYSOUND_FILES = true; 
+	private static boolean COPY_KEYSOUND_FILES = false; 
 	
 	private static int STARTING_HITSOUND_SET_NUMBER_OFFSET = 1;
 	
@@ -46,6 +46,8 @@ public class test {
 			Set<IntegerPair> uniqueKeysoundCombinations = new TreeSet<IntegerPair>();
 			List<IntegerPair> uniqueKeysoundCombinationsNumbered = new ArrayList<IntegerPair>();
 			Set<Integer> sliderStartTimestamps = new TreeSet<Integer>();
+			Set<Integer> sliderEndTimestamps = new TreeSet<Integer>();
+			//Map<Integer, Integer> sliderStartTimestamps = new TreeMap<Integer, Integer>();
 			
 			String[] files = folder.list();
 			for (String file: files)
@@ -75,8 +77,16 @@ public class test {
 			}
 			br.close();
 			
-			//Make list of distinctive combination of keysounds
+			
+						
 			for (Note note: notes){
+				//Make list of slider starts and ends, if the note is in the leftmost two columns
+				if ((note.column == 1 || note.column == 2) && note.noteType == 128){
+					sliderStartTimestamps.add(note.time);
+					sliderEndTimestamps.add(note.sliderEndTime);
+				}
+				
+				//Make list of distinctive combination of keysounds
 				if (keysoundCombinationAtTime.containsKey(note.time)){
 					keysoundCombinationAtTime.get(note.time).second = note.keysound;
 					keysoundCombinationAtTime.get(note.time).rearrangeValuesSmallerFirst();
@@ -85,7 +95,8 @@ public class test {
 					IntegerPair uniqueKeysoundCombination = new IntegerPair();
 					uniqueKeysoundCombination.first = note.keysound;
 					
-					if (note.noteType == 128) uniqueKeysoundCombination.second = -2;
+					//If this note is a slider start, or has a slider end that occur at same time, mark as -2 (single hitsound that requires a new custom set)
+					if (note.noteType == 128 || sliderEndTimestamps.contains(note.time)) uniqueKeysoundCombination.second = -2;
 					else uniqueKeysoundCombination.second = -1;
 										
 					
@@ -94,11 +105,10 @@ public class test {
 				}
 			}
 			
-			//Make list of slider starts
-			for (Note note: notes){
-				if ((note.column == 1 || note.column == 2) && note.noteType == 128)
-					sliderStartTimestamps.add(note.time);
-			}
+			
+			//for (Note note: notes){
+				
+			//}
 			
 			//Associate timestamps with which set of keysound combination
 			Set<Integer> keys = keysoundCombinationAtTime.keySet();
@@ -304,11 +314,15 @@ public class test {
 					sb.append(',');
 					sb.append(80);
 					sb.append(',');
-					sb.append("0|0");
-					sb.append(',');
-					sb.append("0:0|3:0");
+					
+					if (pair.second != -2) sb.append("8|0");
+					else sb.append("0|0");
+					
+					sb.append(',');										
+					sb.append("1:1|3:0");								
 					sb.append(',');
 					sb.append("1:1:0:0:");
+					
 				} 
 				else {
 					sb.append(1);

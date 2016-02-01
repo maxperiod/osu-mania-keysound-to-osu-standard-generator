@@ -6,9 +6,10 @@ import java.util.List;
 public class Note {
 	public int column = -1;
 	public int time;
-	//public int length;
+	public int sliderEndTime;
 	public int noteType;
 	public int keysound = -1;
+	
 	
 	public Note(String line, List<String> keysounds){
 		String[] components = line.split(",");
@@ -39,6 +40,7 @@ public class Note {
 		else if (noteType == 128){
 			if (keysoundComponents.length == 6) 
 				keysound = keysounds.indexOf(keysoundComponents[5]);
+			sliderEndTime = Integer.parseInt(keysoundComponents[0]);
 		}
 		
 		
