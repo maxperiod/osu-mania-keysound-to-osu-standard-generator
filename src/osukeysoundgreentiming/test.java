@@ -18,7 +18,7 @@ public class test {
 	private static String inputKeysoundOsuFile = "E:\\osu!\\Songs\\zl o2jam\\Dr.Flowershirts - zl (Max Period) [keysound sliders].osu"; 
 	private static String outputFolderPath = "E:\\osu!\\Songs\\zl o2jam - Copy";
 
-	private static boolean COPY_KEYSOUND_FILES = false; 
+	private static boolean COPY_KEYSOUND_FILES = true; 
 	
 	private static int STARTING_HITSOUND_SET_NUMBER_OFFSET = 1;
 	
@@ -42,6 +42,7 @@ public class test {
 			//List<RawHitObject> rawHitObjects = new ArrayList<RawHitObject>();
 			
 			List<Note> notes = new ArrayList<Note>();
+			List<Pair<Integer, String>> storyboardHitsounds = new ArrayList<Pair<Integer, String>>();
 			Map<Integer, IntegerPair> keysoundCombinationAtTime = new TreeMap<Integer, IntegerPair>();
 			Set<IntegerPair> uniqueKeysoundCombinations = new TreeSet<IntegerPair>();
 			List<IntegerPair> uniqueKeysoundCombinationsNumbered = new ArrayList<IntegerPair>();
@@ -73,6 +74,13 @@ public class test {
 					Note note = new Note(line, keysounds);
 					if (note.column == 1 || note.column == 2)
 						notes.add(note);
+					else{
+						Pair<Integer, String> pair = new Pair<Integer, String>();
+						pair.first = note.time;
+						pair.second = keysounds.get(note.keysound);
+						storyboardHitsounds.add(pair);
+					}
+						
 				}
 			}
 			br.close();
@@ -250,7 +258,22 @@ public class test {
 				
 			}
 			
-			System.out.println("Generate inheriting timing points");
+			System.out.println("=== Generate Storyboard hitsounds ===");
+			//Set<Integer> storyboardKeys = storyboardHitsounds.keySet();
+			for (Pair pair: storyboardHitsounds){
+				StringBuilder sb = new StringBuilder();
+				sb.append("Sample");
+				sb.append(',');
+				sb.append(pair.first);
+				sb.append(",0,\"");
+				sb.append(pair.second);
+				sb.append("\",");
+				sb.append(70);
+				
+				System.out.println(sb.toString());
+			}
+			
+			System.out.println("=== Generate inheriting timing points ===");
 			//Generate inheriting timing points
 			for (int key: keys){
 
@@ -270,7 +293,7 @@ public class test {
 			}
 			
 			
-			System.out.println("generate notes");
+			System.out.println("=== generate notes ===");
 			//Generate notes
 			for (int key: keys){
 
