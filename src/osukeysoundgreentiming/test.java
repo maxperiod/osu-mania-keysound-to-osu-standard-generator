@@ -41,7 +41,7 @@ public class test {
 			List<String> keysounds = new ArrayList<String>();
 			//List<RawHitObject> rawHitObjects = new ArrayList<RawHitObject>();
 			
-			List<Note> notes = new ArrayList<Note>();
+			List<ProcessedNote> notes = new ArrayList<ProcessedNote>();
 			List<Pair<Integer, String>> storyboardHitsounds = new ArrayList<Pair<Integer, String>>();
 			Map<Integer, IntegerPair> keysoundCombinationAtTime = new TreeMap<Integer, IntegerPair>();
 			Set<IntegerPair> uniqueKeysoundCombinations = new TreeSet<IntegerPair>();
@@ -71,7 +71,7 @@ public class test {
 					if (line.isEmpty()) break;
 					//String[] lineEntries = line.split(",");					
 					
-					Note note = new Note(line, keysounds);
+					ProcessedNote note = new ProcessedNote(line, keysounds);
 					if (note.column == 1 || note.column == 2)
 						notes.add(note);
 					else{
@@ -87,7 +87,7 @@ public class test {
 			
 			
 						
-			for (Note note: notes){
+			for (ProcessedNote note: notes){
 				//Make list of slider starts and ends, if the note is in the leftmost two columns
 				if ((note.column == 1 || note.column == 2) && note.noteType == 128){
 					sliderStartTimestamps.add(note.time);
