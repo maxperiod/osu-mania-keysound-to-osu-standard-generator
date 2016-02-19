@@ -19,7 +19,7 @@ public class ConstrictAndMoveExcessNotesToStoryboard {
 		
 		final int DEFAULT_VOLUME = 70;
 		
-		Map<Integer, List<Note>> notesAtTimes = ManiaColumnFunctions.getManiaNotesAtTimes(beatmap);//new TreeMap<Integer, List<Note>>();
+		Map<Integer, ArrayList<Note>> notesAtTimes = ManiaColumnFunctions.getManiaNotesAtTimes(beatmap);//new TreeMap<Integer, List<Note>>();
 		
 		int numKeys = beatmap.difficultyFields.get("CircleSize").intValue();
 		

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ManiaColumnFunctions {
 	
@@ -23,15 +24,15 @@ public class ManiaColumnFunctions {
 		return beatmap.difficultyFields.get("CircleSize").intValue();
 	}
 	
-	public static Map<Integer, List<Note>> getManiaNotesAtTimes(Beatmap beatmap){
+	public static Map<Integer, ArrayList<Note>> getManiaNotesAtTimes(Beatmap beatmap){
 		int numKeys = getKeyCount(beatmap);//.difficultyFields.get("CircleSize").intValue();
-		Map<Integer, List<Note>> notesAtTimes = new HashMap<Integer, List<Note>>();
+		Map<Integer, ArrayList<Note>> notesAtTimes = new TreeMap<Integer, ArrayList<Note>>();
 		for (Note note: beatmap.notes){
 			if (notesAtTimes.containsKey(note.time)){
 				notesAtTimes.get(note.time).set(ManiaColumnFunctions.xToColumn(note.x, numKeys), note);
 			}
 			else {
-				List<Note> notesAtTime = new ArrayList<Note>();		
+				ArrayList<Note> notesAtTime = new ArrayList<Note>();		
 				for (int i = 0; i < numKeys; i ++) notesAtTime.add(null);
 				
 				notesAtTime.set(ManiaColumnFunctions.xToColumn(note.x, numKeys), note);

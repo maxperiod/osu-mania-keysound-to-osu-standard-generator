@@ -27,7 +27,7 @@ public class ExpandManiaBeatmapWithStoryboardSoundSamples {
 		
 		
 		
-		Map<Integer, List<Note>> notesAtTimes = ManiaColumnFunctions.getManiaNotesAtTimes(beatmap);//new TreeMap<Integer, List<Note>>();
+		Map<Integer, ArrayList<Note>> notesAtTimes = ManiaColumnFunctions.getManiaNotesAtTimes(beatmap);//new TreeMap<Integer, List<Note>>();
 		
 		int numKeys = beatmap.difficultyFields.get("CircleSize").intValue();
 		
@@ -47,7 +47,7 @@ public class ExpandManiaBeatmapWithStoryboardSoundSamples {
 			StoryboardSoundSample sample = beatmap.storyboardSoundSamples.get(i);
 			
 			if (!notesAtTimes.containsKey(sample.time)){
-				List<Note> notesAtTime = new ArrayList<Note>();		
+				ArrayList<Note> notesAtTime = new ArrayList<Note>();		
 				for (int j = 0; j < numColumns; j ++) notesAtTime.add(null);
 				notesAtTimes.put(sample.time, notesAtTime);
 			}
