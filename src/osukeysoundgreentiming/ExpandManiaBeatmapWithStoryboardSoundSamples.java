@@ -13,8 +13,8 @@ public class ExpandManiaBeatmapWithStoryboardSoundSamples {
 	
 
 	
-	private static final String inputFile = "E:\\osu!\\Songs\\_import crazy go go\\Super Station  Impact Line - Crazy Go Go (Max Period) [Lv.13].osu";
-	private static final String outputFile = "E:\\osu!\\Songs\\_import crazy go go\\test.osu";
+	private static final String inputFile = "E:\\osu!\\Songs\\blank5\\zBlueM  NoteFactory - Feel so good (Max Period) [keysound work].osu";
+	private static final String outputFile = "E:\\osu!\\Songs\\blank5\\expanded.osu";
 	
 	public static void expandAndMoveStoryboardHitsoundsToMap(Beatmap beatmap, int numColumns){
 		

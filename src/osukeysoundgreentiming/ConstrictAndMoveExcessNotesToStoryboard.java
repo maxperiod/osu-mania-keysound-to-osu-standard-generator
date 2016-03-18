@@ -10,8 +10,8 @@ import java.util.Set;
 
 public class ConstrictAndMoveExcessNotesToStoryboard {
 
-	private static final String inputFile = "E:\\osu!\\Songs\\_import beach paradise\\BeautifulDay  NoteFactory - Beach Paradise (Max Period) [keysound work].osu";
-	private static final String outputFile = "E:\\osu!\\Songs\\_import beach paradise\\test.osu";
+	private static final String inputFile = "E:\\osu!\\Songs\\blank5\\BlueM  NoteFactory - Feel so good (Max Period) [keysound work].osu";
+	private static final String outputFile = "E:\\osu!\\Songs\\blank5\\test.osu";
 	
 	
 	public static void constrictAndMoveExcessNotesToStoryboard(Beatmap beatmap, int numColumns){

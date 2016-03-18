@@ -16,8 +16,8 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class ConvertManiaKeysoundsToStd {
-	private static String inputKeysoundOsuFile = "E:\\osu!\\Songs\\_import beach paradise\\BeautifulDay  NoteFactory - Beach Paradise (Max Period) [keysound work].osu"; 
-	private static String outputFolderPath = "E:\\osu!\\Songs\\_import beach paradise\\";
+	private static String inputKeysoundOsuFile = "E:\\osu!\\Songs\\blank\\BeautifulDay  Impact Line - Song of Pain (Max Period) [keysound work].osu"; 
+	private static String outputFolderPath = "E:\\osu!\\Songs\\blank\\";
 
 	private static boolean COPY_KEYSOUND_FILES = true; 
 	
@@ -243,7 +243,8 @@ public class ConvertManiaKeysoundsToStd {
 				
 				boolean isSlider = false;
 				for (int timestamp: sliderStartTimestamps){
-					if (keysoundCombination == keysoundCombinationAtTime.get(timestamp)) isSlider = true;
+					if (keysoundCombination.equals(keysoundCombinationAtTime.get(timestamp))) isSlider = true;
+					//if (keysoundCombination == keysoundCombinationAtTime.get(timestamp)) isSlider = true;
 				}
 				if (isSlider){
 					System.out.println("KS combination " + i + "is slider");
